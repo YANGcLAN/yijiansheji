@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="img/logo.ico"/>
+    <title>设计师团队-设计师简介</title>  
+    <link rel="stylesheet" href="css/shubiao.css">
+    <script src="js/vue.js"></script>
+    <script src="js/axios.min.js"></script> 
+</head>
+<body>
+<div id="app">
+    <div id="nav"></div>
+    <div class="team_sec">    
+        <div class="scroller">
+            <div class="room" v-for="item in list" :key="item.lid">
+                <div class="room__side room__side--back">    
+                    <img class="room__img" :src="item.img_center_1" />  
+                    <img class="room__img" :src="item.img_center_2" />
+                </div>
+                <div class="room__side room__side--left">
+                    <img class="room__img" :src="item.img_left_1" />
+                    <img class="room__img" :src="item.img_left_2" />
+                    <img class="room__img" :src="item.img_left_3" />
+                </div>
+                <div class="room__side room__side--right">
+                    <img class="room__img" :src="item.img_right_1" />
+                    <img class="room__img" :src="item.img_right_2" />
+                    <img class="room__img" :src="item.img_right_3" /> 
+                </div>
+                <div class="room__side room__side--bottom"></div>
+                <div class="slide">
+                    <h2 class="slide__name"></h2>
+                    <h3 class="slide__title"><span>{{item.job}}</span></h3>
+                    <p class="slide__date">{{item.uname}}</p>
+                    <h4 class="team_btn"><a :href="item.href">查看更多</a></h4>
+                </div>
+            </div>
+        </div>  
+    </div>
+    <!--左右切换按钮-->
+	<nav class="nav">
+        <button class="btn btn--nav btn--nav-left"> 
+            <svg class="nav-icon nav-icon--left" width="42px" height="12px" viewBox="0 0 70 20">
+                <path class="nav__triangle" d="M52.5,10L70,0v20L52.5,10z"/>
+                <path class="nav__line" d="M55.1,11.4H0V8.6h55.1V11.4z"/>
+            </svg> 
+        </button>
+        <button class="btn btn--nav btn--nav-right"> 
+            <svg class="nav-icon nav-icon--right" width="42px" height="12px" viewBox="0 0 70 20">
+                <path class="nav__triangle" d="M52.5,10L70,0v20L52.5,10z"/>
+                <path class="nav__line" d="M55.1,11.4H0V8.6h55.1V11.4z"/>
+            </svg> 
+        </button>
+    </nav>	  
+    <!--warp--> 
+    <div class="team_box">
+        <div class="team_box_img"  v-for="item in list.slice(0,6)" :key="item.lid">
+            <img :src="item.img_tou"/>
+        </div> 
+    </div>
+    <!--warp-->
+</div>
+<footer id="footer"></footer>   
+    <script src="js/vue.js"></script>
+    <script src="js/axios.min.js"></script> 
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/team.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/footer.js"></script>
+    <script>
+       var vm=new Vue({
+        el:"#app",
+            data:{
+            list:[ ],
+            img_tou:null,
+        },
+        created() {
+            axios.get(
+                "http://localhost:3000/lun"
+            ).then(res=>{
+                this.list=res.data.data;
+            
+
+            })
+        },
+    }) 
+    </script> 
+</body>
+</html>

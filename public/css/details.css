@@ -1,0 +1,168 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+@font-face {
+	font-family: 'advent-Lt2';
+	src: url('../fonts/advent-Lt2.eot');
+	src: local('☺'), url('../fonts/advent-Lt2.woff') format('woff'), url('../fonts/advent-Lt2.ttf') format('truetype'), url('../fonts/advent-Lt2.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'AnticDidone-Regular';
+	src: url('../fonts/AnticDidone-Regular.eot');
+	src: local('☺'), url('../fonts/AnticDidone-Regular.woff') format('woff'), url('../fonts/AnticDidone-Regular.ttf') format('truetype'), url('../fonts/AnticDidone-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+    font-family: "Microsoft YaHei", 微软雅黑, STHeiti;
+    overflow-x: hidden;
+}
+
+
+/********详情页********/
+.details_box{
+    padding:80px 0;
+    margin:0 181.5px;
+}
+.details_box .container{
+    width:100%;
+    margin:0 auto;
+
+}
+img{ border:0;}
+.clear{
+    clear: both;
+}
+
+/***左边内容***/
+.details_box .container .details_left{
+    float:left;
+    width:63%;
+    padding-right:30px;
+    border-right: 1px solid #ddd;
+}
+/*************左边标题************/
+.details_box .container .details_left .details_title{
+    margin-bottom:20px;
+}
+.details_box .container .details_left .details_title h3{
+    font-size:34px;
+    color:#333;
+    margin:0;
+    font-weight: bold;
+    line-height:40px;
+    letter-spacing: 2px;
+    font-family:  "微软雅黑";
+}
+.details_box .container .details_left .details_pic{
+    width:100%;
+}
+.details_box .container .details_left .details_pic>p{
+    font-size: 18px;
+    color:#666;
+    line-height:30px;
+    margin:0 0 20px 0;
+}
+/***************左边图片**************/
+
+.details_box .container .details_left .details_pic #colee{
+    width:100%;
+    height:650px;
+    overflow: hidden;
+}
+.details_box .container .details_left .details_pic #colee img{
+    width:100%;
+    height:448.8px;
+    margin:10px 0 0 0;
+}
+
+/* .details_box .container .details_left .details_pic p{
+    margin:0 0 10px 0;
+}
+.details_box .container .details_left .details_pic p img{
+    width:100%;
+    display:block;
+} */
+
+/****右边内容*****/
+.details_box .container .details_right{
+    float:right;
+    width:31.1%;
+    padding-left: 30px;
+}
+/***********右边第一部分***********/
+.details_box .container .details_right .details_list{
+    margin-bottom:40px;
+}
+.details_box .container .details_right .details_list .details_title h3{
+    font-size:20px;
+    font-weight: bold;
+    color:#851217;
+    letter-spacing: 1px;
+    margin:0 0 14px;
+}
+.details_box .container .details_right .details_list .details_text p{
+    font-size:14px;
+    line-height: 26px;
+    margin:0;
+}
+.details_box .container .details_right .details_list .details_text p span{
+    color:#333;
+    font-weight: bold;
+}
+/*************右边第二部分*****************/
+.details_box .container .details_right .details_author{
+    margin-bottom:40px;
+}
+/**********作者标题部分*************/
+.details_box .container .details_right .details_author .details_title h3{
+    font-size:20px;
+    font-weight: bold;
+    color:#851217;
+    letter-spacing: 1px;
+    margin:0 0 14px;
+}
+.details_box .container .details_right .details_author .details_text .details_img{
+    margin-bottom:10px;
+}
+.details_box .container .details_right .details_author .details_text .details_img img{
+    width:100%;
+    display:block;
+}
+/************作者内容部分**************/
+.details_box .container .details_right .details_author .details_text p{
+    font-size:14px;
+    line-height: 26px;
+    margin:0;
+}
+.details_box .container .details_right .details_author .details_text p span{
+    color:#333;
+    font-weight: bold;
+}
+.details_box .container .details_right .details_author .details_text .details_cont{
+    font-size:14px;
+    line-height: 26px;
+    margin:0;
+}
+.details_box .container .details_right .details_author .details_text .details_cont h3{
+    font-size:20px;
+    font-weight: bold;
+    color:#851217;
+    letter-spacing: 1px;
+    margin:30px 0 14px;
+}
+.details_box .container .details_right .details_author .details_text .details_more{
+    text-align: right;
+    margin-top:px;
+}
+.details_box .container .details_right .details_author .details_text .details_more a{
+    font-size:14px;
+    color:#851217;
+    line-height:24px;
+    font-weight: bold;
+}

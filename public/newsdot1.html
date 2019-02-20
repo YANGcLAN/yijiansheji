@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="shortcut icon" href="img/mql/logo.ico" />
+  <title>一简装饰设计</title>
+  <link rel="stylesheet" href="css/bootstrap.css">  
+  <link rel="stylesheet" href="css/new_information.css">
+  <link rel="stylesheet" href="css/jquery-ui.css">
+  <link rel="stylesheet" href="css/menu.css">
+  <link rel="stylesheet" href="css/newsdot.css">
+  <script src="js/vue.js"></script>
+  <script src="js/axios.min.js"></script>
+  <style>
+      *{box-sizing: border-box}
+      body{background: #eee}
+  </style>
+</head>
+<body>
+    <div id="nav"></div>
+    <div id="header"></div>
+    <div class="newsd_box" id="app">
+        <div class="container">
+            <div class="newsd_cot">
+                <div class="newsd_tit">
+                    <h3>{{list.title}}</h3>
+                    <h5></h5>
+                </div>
+                <div class="newsd_wz">
+                    <p style="text-align:center" v-for="item of list_img">
+                        <img :src="item.img_url2" alt="">
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="news_detail_bottom">
+            <div class="news_top">
+                <h2>
+                    <span>News</span>
+                    新闻推荐
+                </h2>
+            </div>
+            <div class="dot1">
+                <div class="news_content_ul">
+                    <div class="news_content_li">
+                        <a href="http://127.0.0.1:3000/newsdot1.html?nid=4">
+                            <img src="img/news/5aaf7058c37e0.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="news_content_text">
+                            <h4>公司新闻</h4>
+                            <a href="http://127.0.0.1:3000/newsdot1.html?nid=5"> 
+                                <h5>桐庐拓展训练</h5>
+                            </a>
+                            <p>2018.2.10</p>
+                    </div>
+                </div>
+                <div class="news_content_ul">
+                    <div class="news_content_li">
+                        <a href="http://127.0.0.1:3000/newsdot1.html?nid=5">
+                            <img src="img/news/5aaf6fe082561.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="news_content_text">
+                            <h4>公司新闻</h4>
+                            <a href="http://127.0.0.1:3000/newsdot1.html?nid=5"> 
+                                <h5>引进航拍机</h5>
+                            </a>
+                            <p>2018.2.10</p>
+                    </div>
+                </div>
+                <div class="news_content_ul">
+                    <div class="news_content_li">
+                        <a href="http://127.0.0.1:3000/newsdot1.html?nid=6">
+                            <img src="img/news/5aaf6ee0490c2.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="news_content_text">
+                        
+                            <h4>公司新闻</h4>
+                            <a href="http://127.0.0.1:3000/newsdot1.html?nid=6"> 
+                                <h5>引进交互电视系统</h5>
+                            </a>
+                            <p>2018.2.10</p>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  <div id="footer"></div>
+  <script>
+      var vm = new Vue({ 
+            el:"#app",
+            data () {
+                return {
+                    list:[],
+                    list_img:[],
+                    list_text:[]
+                }
+            },
+            created () {
+               this.getImage();
+               this.getText();
+            },
+            methods: {
+                getImage(){
+                    var nid = location.search.slice(5);
+                    console.log(nid);
+                    axios.get(
+                        'http://localhost:3000/newimg?id='+nid
+                    ).then(res=>{
+                        this.list_img=res.data;
+                        this.list=res.data[0];
+                        console.log(this.list_img);
+                    })
+                },
+                getText(){
+
+                }   
+            }
+        })
+  </script>
+  <script src="js/jquery-3.2.1.js"></script>
+  <script src="js/nav.js"></script>
+  <script src="js/header.js"></script>
+  <script src="js/footer.js"></script> 
+  <script src="js/newsdot1.js"></script> 
+</body>
+</html>

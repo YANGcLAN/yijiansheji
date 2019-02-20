@@ -1,0 +1,394 @@
+@charset "UTF-8";
+/* Icons */
+*{
+    margin:0;
+    padding: 0;
+    list-style:none;
+}
+body{
+   overflow-x: hidden;
+}
+a{ color: rgba(255, 255, 255, 0.6);
+    outline: none;
+    text-decoration: none;
+    transition: 0.2s;}   
+.clear:after {
+	content: " ";
+    display: table;
+    clear: both;
+}
+#app{
+    overflow: hidden;
+    margin:  auto;
+    perspective: 2500px;
+}
+.team_sec {
+   position: relative;
+   overflow: hidden;
+   width: 12000px;
+   height: 600px;
+   transform: translateZ(250px);
+   transition:all .3s linear;
+}
+
+#app .active_img{
+    transform: translateZ(0px);
+}
+.scroller {
+    height: 630px;
+    position: absolute;
+    top: -17px;
+    left: 0px;
+    overflow: hidden;
+}
+
+.room {
+    transition:all .2s linear;
+    width: 1423px;
+    height: 600px;
+    pointer-events: none;
+    transform-style: preserve-3d;
+    float: left;
+    perspective: 2000px;
+}
+
+.room--current {
+   pointer-events: auto;
+   opacity: 1;
+}
+
+
+
+.icon {
+   display: block;
+   width: 1.5em;
+   height: 1.5em;
+   margin: 0 auto;
+   fill: currentColor;
+}
+.btn {
+   position: relative;
+   margin: 0;
+   padding: 0;
+   border: 0;
+   background: none;
+   outline: 0;
+}
+.btn:focus {
+   outline: 0 !important;
+   background: none !important;
+}
+.btn:hover {
+   color: #851217;
+   box-shadow: none;
+}
+.btn--nav {
+   font-size: 2em;
+   pointer-events: auto;
+}
+.btn--nav-left {
+   float: left;
+}
+.btn--nav-right {
+   float: right;
+}
+.nav-icon--right {
+   transform: scale3d(-1, -1, 1);
+}
+.nav__triangle,
+.nav__line {
+   transition: transform 0.3s;
+   fill: currentColor;
+}
+.btn--nav:hover .nav__triangle {
+   transform: translate3d(-54px, 0, 0);
+}
+.btn--nav:hover .nav__line {
+   transform: translate3d(17px, 0, 0);
+}
+.btn--info {
+   margin: 0 2em 0 auto;
+}
+
+.btn--toggle.btn--active {
+   z-index: 100;
+   color: #fff;
+}
+
+.btn--toggle.btn--active:hover {
+   color: #1f1f21;
+}
+
+.btn--toggle .icon:nth-child(2),
+.btn--toggle.btn--active .icon:first-child {
+   display: none;
+}
+
+.btn--toggle.btn--active .icon:nth-child(2) {
+   display: block;
+}
+
+
+.room__side {
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   transform-style: preserve-3d;
+}
+
+.room__side--left,
+.room__side--right {
+   width: 4000px;
+   /* depth */
+   height: 800px;
+   background: #dbdbdb;
+}
+
+.room__side--back {
+    width: 1420px;
+    height: 800px;
+   background: #e9e9e9;
+   box-shadow: 0 0 0 2px #e9e9e9;
+   transform: translate3d(0, 0,-2500px);
+   
+   /* Rotation due to rendering bug in Chrome when loader slides up (images seem cut off) */
+}
+
+.room__side--right {
+   right: 0;
+   justify-content: flex-end;
+   transform: rotate3d(0, 1, 0, -90.03deg);
+   transform-origin: 100% 50%;
+}
+
+.room__side--left {
+   justify-content: flex-start;
+   transform: rotate3d(0, 1, 0,90deg);
+   transform-origin: 0 50%;
+}
+
+.room__side--bottom { 
+    width: 1800px;
+    height: 4000px;
+    background: #d0d0d0;
+    transform: rotate3d(1, 0, 0, 90deg) translate3d(0, -4000px, 0);
+   transform-origin: 50% 0%;
+}
+
+.room__side--bottom {
+   top: 110%;
+}
+
+
+/* Inner elements */
+
+.room__side--back .room__img{
+   margin: 0 5% 9% 5%;
+}
+.room__img {
+   flex: none;
+   max-width: 44%;
+    max-height: 50%;
+   margin: 0 5% 3% 3%;
+   transform: translate3d(0, 0, 10px);
+   backface-visibility: hidden;
+}
+
+
+/* Content */
+
+.content {
+   position: absolute;
+   top: 0;
+   left: 0;
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   height: 76vh;
+   
+   min-height: 600px;
+}
+
+/* Slides */
+
+.slides {
+   position: relative;
+   flex: 1;
+}
+
+.slide {
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   justify-content: center; 
+   width: 70vw;
+   height: 100%;
+   margin: 6vw 0 0 20vw;
+   /* pointer-events: none; */
+   text-align: right;
+   pointer-events:auto;
+}
+
+.slide--current {
+   pointer-events: auto;
+   opacity: 1;
+}
+
+.slide__name {
+   font-size: 15vw;
+   line-height: 0.8;
+   margin: 0;
+   padding: 0 0 0 5vw;
+   text-indent: -5vw;
+   letter-spacing: -0.05em;
+   text-transform: lowercase;
+   color: #fff;
+}
+
+.slide__title,
+.slide__date {
+   text-align: right;
+}
+
+.slide__title {
+   font-size: 42px;
+   line-height: 1.2;
+   letter-spacing: 2px;
+   font-weight: bold;
+   display: flex;
+   flex-direction: column;
+   align-items: flex-end;
+   margin-bottom: 14px;
+   color: #333;
+   transform: translateY(-150px);
+   opacity: 0;
+}
+
+.slide__date {
+   font-size: 34px;
+   line-height: 1.2;
+   font-weight: bold;
+   letter-spacing: 1px;
+   margin: 0;
+   text-transform: uppercase;
+   color: #fff;
+   transform: translateY(150px);
+   opacity: 0;
+}
+
+.team_btn {
+   margin: 0;
+   opacity: 0;
+}
+.a1{
+    opacity: 1;
+    transition:all .5s linear;
+    transform: translateY(0px);
+}
+.a2{
+   opacity: 1;
+   transition:all 1s linear;
+}
+.a3{
+   opacity: 1;
+   transition:all .5s linear;
+    transform: translateY(0px);
+}
+.slide__number {
+   font-size: 0.4em;
+   display: inline-block;
+   margin: 0.5em 0 0 0;
+   padding: 0.4em 0.5em 0.25em 0.5em;
+   color: #fff;
+   background: #851217;
+  
+}
+h4.team_btn a {
+   margin: 30px 0 10px;
+   font-size: 14px;
+   line-height: 40px;
+   height: 40px;
+   width: 150px;
+   text-align: center;
+   background: #851217;
+   color: #fff;
+   display: inline-block;
+   letter-spacing: 1px;
+}
+
+
+
+/* Nav */
+
+.nav {
+   /*display: flex;*/
+   justify-content: space-between;
+   width: 100%;
+   margin: auto 0 10px 0;
+   pointer-events: none;
+   z-index: 99;
+   position: absolute;
+   bottom: 5%;
+}
+.nav button{
+   margin:0 30px;
+   font-size:#ddd;
+} 
+path.nav__triangle,path.nav__line {
+    fill:#7B68EE;
+}
+
+
+/*team*/
+
+.team_box {
+   display: flex;
+   position: absolute;
+   bottom: 25px;
+   left: 100px;
+   bottom: 4%;
+   z-index: 111;
+}
+
+.team_box_img {
+   margin: 0 15px;
+   cursor: pointer;
+   position: relative;
+   
+}
+.team_box_img:before{
+   content: '';
+   width: calc(100% + 10px);
+   height: calc(100% + 10px);
+   top: -8px;
+   left: -6px;
+   position: absolute;
+   border-radius: 50%;
+   border: solid 1px rgba(0,0,0,0);
+   transition: all .6s linear;
+     
+}
+.team_box_img.active:before {  
+   left: -5px;
+   top:-5px;
+   position: absolute;
+   border:2px solid #851217; 
+   opacity: 1;
+}
+.team_warpper{
+   display: none;
+}
+
+
+.team_box_img img {
+   width: 50px;
+   height: 50px;
+   border-radius: 100%;
+}
+
+
+
+
+
+

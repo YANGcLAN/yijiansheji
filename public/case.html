@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="img/mql/logo.ico" />
+    <title>一简装饰设计</title>
+    <link rel="stylesheet" href="css/case.css">
+    
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/case.js"></script>
+    <script src="js/axios.min.js"></script>
+</head>
+<body>
+
+    <div id="nav"></div>
+    <header id="header"></header>
+    <div class="container" id="app">    
+        <div class="title">
+            <h2> <span>Case</span>案例展示</h2>
+        </div>
+        <div class="case_top">
+            <div class="case_li">
+                <h4>选择风格：</h4>
+                <ul>
+                    <li v-for="(item, index) in style" v-on:click="addClass1(index)" ><a href="javascript:;" v-bind:class="{ active:index==current1}" :data-attr="item">{{item}}</a></li>
+                </ul>
+            </div>
+            <div class="case_li">
+                <h4>选择面积：</h4>
+                <ul>
+                    <li v-for="(item, index) in area" v-on:click="addClass2(index)" ><a href="javascript:;"  v-bind:class="{ active:index==current2}" :data-attr="item">{{item}}</a></li>
+                </ul>
+            </div>
+            <div class="case_li">
+                <h4>选择空间：</h4>
+                <ul>
+                    <li v-for="(item, index) in room" v-on:click="addClass3(index)" ><a href="javascript:;" v-bind:class="{ active:index==current3}" :data-attr="item">{{item}}</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="case_center" >
+            <div class="case_flex">
+                <div class="case_img" v-for="item of list" >
+                    <a :href="'http://localhost:3000/details.html?cid='+item.cid" v-on:mouseenter="yryc($event)"v-on:mouseleave="yryc2($event)">
+                        <img :src="item.img_url" alt="">
+                        <div class="yr hide">
+                            <p class="cname">{{item.cname}}</p>
+                            <span class="sjs">{{item.sjs}}</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="case_bottom">
+            <div class="case_btn">
+                <ul @click.prevent="fy($event)">
+                    <li><a href="javascript:;">«</a></li>
+                    <li><a href="javascript:;" :class="Act1">1</a></li>
+                    <li><a href="javascript:;" :class="Act2">2</a></li>
+                    <li><a href="javascript:;" :class="Act3">3</a></li>
+                    <li><a href="javascript:;" :class="Act4">4</a></li>
+                    <li><a href="javascript:;" :class="Act5">5</a></li>
+                    <li><a href="javascript:;" :class="Act6">6</a></li>
+                    <li><a href="javascript:;" >»</a></li>
+                </ul>
+            </div>    
+        </div>
+    </div>
+    <footer id="footer"></footer>
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{ 
+                list:[],
+                pno:1,
+                current1:0,
+                current2:0,
+                current3:0,
+                string:"",
+                style:['全部','新中式','法式','欧式','简欧','新古典','现代','美式','其他'],
+                area:["全部","120-300㎡","300-500㎡","500-800㎡","800-1200㎡","1200㎡以上"],
+                room:["全部","门厅","客厅","家庭室","主卧","次卧","儿童房","书房","衣帽间","卫浴室","影音室","健身房","园林庭院","其他"],
+                Act1:{active:true},
+                Act2:{active:false},
+                Act3:{active:false},
+                Act4:{active:false},
+                Act5:{active:false},
+                Act6:{active:false},
+            },
+            created () {
+                this.getImage();
+                
+            },
+            methods:{
+                getImage(){
+                    axios.get(
+                    "http://localhost:3000/select",
+                    {
+                        params:{ pno:this.pno }
+                    }
+                    ).then(res=>{
+                    var data=res.data.data;
+                    if(data){
+                        this.list=data;
+                    }
+                    });
+                },
+                yryc(e){
+                    e.target.children[1].className="yr";
+                },
+                yryc2(e){
+                    e.target.children[1].className="yr hide";
+                },
+                fy(event){
+                    if(event.target.innerHTML=="«"){
+                        if(this.pno>1){
+                            pno=--this.pno;
+                            this.btn(pno);
+                            this.ajax(pno);
+                        }
+                    }
+                    else if(event.target.innerHTML=="»"){
+                        if(this.pno<6){
+                            pno=++this.pno;
+                            this.btn(pno);
+                            this.ajax(pno);
+                        }
+                    }
+                        else{
+                            this.pno = event.target.innerHTML; 
+                            pno=this.pno;
+                            pno=parseInt(pno);
+                            this.btn(pno);
+                            this.ajax(pno);
+                        }
+                    
+                },
+                addClass1:function(index){
+                    this.current1=index;
+                    this.ajax2(this.style[ this.current1],this.area[this.current2],this.room[this.current3]);
+                },
+                addClass2:function(index){
+                    this.current2=index;
+                    this.ajax2(this.style[ this.current1],this.area[this.current2],this.room[this.current3]);
+                },
+                addClass3:function(index){
+                    this.current3=index;
+    
+                    this.ajax2(this.style[ this.current1],this.area[this.current2],this.room[this.current3]);
+                },
+                btn(pno){
+                    switch(pno){
+                        case 1 : 
+                        this.Act1.active=true;
+                        this.Act2.active=false;
+                        this.Act3.active=false;
+                        this.Act4.active=false;
+                        this.Act5.active=false;
+                        this.Act6.active=false;
+                        break;
+                        case 2 :
+                        this.Act2.active=true;
+                        this.Act1.active=false;
+                        this.Act3.active=false;
+                        this.Act4.active=false;
+                        this.Act5.active=false;
+                        this.Act6.active=false;
+                        break;
+                        case 3 :
+                        this.Act3.active=true;
+                        this.Act1.active=false;
+                        this.Act2.active=false;
+                        this.Act4.active=false;
+                        this.Act5.active=false;
+                        this.Act6.active=false;
+                        break;
+                        case 4 :
+                        this.Act4.active=true;
+                        this.Act1.active=false;
+                        this.Act3.active=false;
+                        this.Act2.active=false;
+                        this.Act5.active=false;
+                        this.Act6.active=false;
+                        break;
+                        case 5 :
+                        this.Act5.active=true;
+                        this.Act1.active=false;
+                        this.Act3.active=false;
+                        this.Act4.active=false;
+                        this.Act2.active=false;
+                        this.Act6.active=false;
+                        break;
+                        case 6 :
+                        this.Act6.active=true;
+                        this.Act1.active=false;
+                        this.Act3.active=false;
+                        this.Act4.active=false;
+                        this.Act5.active=false;
+                        this.Act2.active=false;
+                        break;
+                    }
+                   
+                },
+                ajax(pno){
+                    axios.get(
+                    "http://localhost:3000/select",
+                    {
+                        params:{ pno}
+                    }).then(res=>{
+                    var data=res.data.data;
+                    this.list=data;
+                    });
+                },
+                ajax2(style,area,room){
+                    axios.get("http://localhost:3000/selectAll",
+                        {
+                            params:{
+                                style:style,
+                                area:area,
+                                room:room
+                            }
+                        }).then(res=>{
+                            console.log(res.data);
+                            var data =res.data;
+                            this.list=data;
+                        });
+                }
+            }
+
+        })
+    </script>
+</body>
+</html>

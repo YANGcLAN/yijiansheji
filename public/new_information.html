@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="img/mql/logo.ico" />
+    <title>一简装饰设计</title> 
+    <link rel="stylesheet" href="css/bootstrap.css">  
+    <link rel="stylesheet" href="css/new_information.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <script src="js/vue.js"></script>
+    <script src="js/axios.min.js"></script>
+    <style>
+        *{box-sizing: border-box};     
+    </style>
+</head>
+<body>
+    <div id="nav"></div>
+    <header id="header"></header>
+    <div class="new_box" id="app">
+       <div class="news_top">
+           <h2>
+                <span>News</span>
+                新闻资讯
+           </h2>
+       </div>
+       <div class="container">          
+            <nav>
+                <ul class="main">
+                    <li><a href="#">All</a>
+                        <ul class="drop menu">
+                            <li><a href="javascript:;">All</a></li>
+                            <li><a href="javascript:;">公司新闻</a></li>
+                            <li><a href="javascript:;">行业新闻</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!-- 下拉菜单止 -->  
+        <div class="news_content" >
+            <div class="news_content_ul" v-for="item of list">
+                <div class="news_content_li">
+                    <a :href="'http://localhost:3000/newsdot1.html?nid='+item.id">
+                        <div class="ehover">
+                            <img :src="item.img_url" alt="">
+                            <div class="overlay">
+                                <h2>Hover effect 3</h2>
+                                <button class="info" data-toggle="modal" data-target="#modal3">Show code
+                                </button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="news_content_text">
+                    <a href="newsdot1.html">
+                        <figcaption>
+                        <h4>{{item.new_type}}</h4>
+                        <h5>{{item.title}}</h5>
+                        <p>{{item.new_time}}</p>
+                        </figcaption>
+                    </a>
+                </div>
+            </div>
+            <!-- <div class="news_content_ul">
+                <div class="news_content_li">
+                    <a href="javascript:;">
+                        <div class="ehover">
+                            <img src="img/news/5ac47b4b07370.jpg" alt="">
+                            <div class="overlay">
+                                <h2>Hover effect 3</h2>
+                                <button class="info" data-toggle="modal" data-target="#modal3">Show code
+                                </button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="news_content_text">
+                    <a href="javascript:;">  
+                        <h4>公司新闻</h4>
+                        <h5>年会聚餐</h5>
+                        <p>2018.4.04</p>
+                    </a>
+                </div>
+            </div>
+            <div class="news_content_ul">
+                <div class="news_content_li">
+                    <a href="javascript:;">
+                        <div class="ehover">
+                            <img src="img/news/5ac47ae9abe48.jpg" alt="">
+                            <div class="overlay">
+                                <h2>Hover effect 3</h2>
+                                <button class="info" data-toggle="modal" data-target="#modal3">Show code
+                                </button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="news_content_text">
+                    <a href="javascript:;">
+                        <h4>公司新闻</h4>
+                        <h5>金华活动</h5>
+                        <p>2018.4.04</p>
+                    </a>
+                </div>
+            </div>
+            <div class="news_content_ul">
+                <div class="news_content_li">
+                    <a href="javascript:;">
+                        <div class="ehover">
+                        <img src="img/news/5aaf7058c37e0.jpg" alt="">
+                        <div class="overlay">
+                                <h2>Hover effect 3</h2>
+                                <button class="info" data-toggle="modal" data-target="#modal3">Show code
+                                </button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="news_content_text">
+                    <a href="javascript:;">    
+                        <h4>公司新闻</h4>
+                        <h5>桐庐拓展训练</h5>
+                        <p>2018.2.10</p>
+                    </a>
+                </div>
+            </div>
+            <div class="news_content_ul">
+                <div class="news_content_li">
+                    <a href="javascript:;">
+                        <div class="ehover">
+                        <img src="img/news/5aaf6fe082561.jpg" alt="">
+                        <div class="overlay">
+                                <h2>Hover effect 3</h2>
+                                <button class="info" data-toggle="modal" data-target="#modal3">Show code
+                                </button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="news_content_text">
+                    <a href="javascript:;"> 
+                        <h4>公司新闻</h4>
+                        <h5>引进航拍机</h5>
+                        <p>2018.2.10</p>
+                    </a>
+                </div>
+            </div>
+            <div class="news_content_ul">
+                <div class="news_content_li">
+                    <a href="javascript:;">
+                        <div class="ehover">
+                        <img src="img/news/5aaf6ee0490c2.jpg" alt="">
+                        <div class="overlay">
+                                <h2>Hover effect 3</h2>
+                                <button class="info" data-toggle="modal" data-target="#modal3">Show code
+                                </button>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="news_content_text">
+                    <a href="javascript:;">
+                        <h4>公司新闻</h4>
+                        <h5>引进交互电视系统</h5>
+                        <p>2018.2.10</p>
+                    </a>
+                </div>
+            </div> -->
+        </div>            
+    </div> 
+    <footer id="footer"></footer>
+    <script>
+        var vm=new Vue({ 
+            el:"#app",
+            data () {
+                return {
+                    list:[]
+                }
+            },
+            created () {
+               this.getImage();
+            },
+            methods: {
+                getImage(){
+                    axios.get(
+                        'http://localhost:3000/newinfo'
+                    ).then(res=>{
+                        this.list=res.data
+                    })
+                }   
+            }
+        })
+    </script>
+    <script src="js/jquery-3.2.1.js"></script> 
+    
+    <script src="js/nav.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/header.js"></script>
+	<script src="js/new_information.js"></script>    
+    
+</body>
+</html>

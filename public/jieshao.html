@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="img/logo.ico"/>
+    <title>设计师团队-设计师简介</title>  
+    <link rel="stylesheet" href="css/jieshao.css">
+</head>
+<body>
+	<div id="app">
+        <!--  / warpper  -->
+        <div id="nav"></div>
+        <header id="header"></header>
+        <div class="warpper warpper_margin">     	
+            <div class="teamd_box1">
+            	<div class="container">
+                	<div class="teamd1_left" >
+                    	<div class="teamdL1_img">
+                        	<img :src="list.img"/>
+                        </div>
+                        <div class="teamdL1_wz">
+                        	<h3>{{list.uname}}</h3>
+                            <h5>{{list.job}}</h5>
+                            <p>{{list.school}}</p>
+                           	<p>{{list.count}}</p>
+                        </div>
+                    </div>
+
+                    <div class="teamd1_right">
+                    	<div class="teamdR1_wz">
+                        	<h3>个人介绍</h3>
+                            <p>爱好：旅游，骑行，烹饪，音乐等；</p>
+                            <p>特长：擅长简欧，新中式，美式等设计风格，追求实用方便，温馨舒适，优雅高尚的设计效果。</p>
+                        </div>
+                    	<div class="teamdR1_wz">
+                        	<h3>设计理念</h3>
+                            <p>{{list.sheji}}</p>
+                        </div>
+                    	<div class="teamdR1_wz">
+                        	<h3>主要设计作品</h3>
+                            <h5>别墅类</h5>
+                            <p><span>上海地区：</span>上海佘山银湖别墅，华润橡树湾,南瑞别墅，尚海湾豪庭，世贸滨江花园，爱法奥朗新庄园，汤臣高尔夫别墅，湖山在望，银涛高尔夫别墅，佘山东郡，天马高尔夫别墅，宝华栎庭,中星红庐，玫瑰里，绿地诺丁山等。</p>
+                            <p><span>杭州地区：</span>九溪玫瑰园，绿城桃花源，地中海，滨江西溪明珠，溪上玫瑰园，昆仑府，九龙仓碧玺，绿城香格里拉，绿城蓝庭，富春江花苑，富春山居，绿野御墅，萧山云栖苑，赞成良渚，荀庄等。</p>
+                            <p><span>绍兴地区：</span>宝业四季园，唯美品格，稷山一品，绿城馥园，保利湖畔花园，望府，御江山，大阪风情等。</p>
+                            <p><span>南京地区：</span>玛斯兰德，天泓山庄，绿城玫瑰园，天目湖山庄等。</p>
+                            <h5>商业类</h5>
+                            <p>香港英皇钟表珠宝上海办公楼及其上海旗舰店，美国北美电器（ACA）上海办公室，瑞士雷达表北方区专柜设计,瑞士宝路华手表旗舰店等项目</p>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+            <cdiv class="teamd_box2">
+            	<div class="container">
+                	<div class="ind3_tit tit_cent">
+                        <h2><span>Case</span>他的案例展示</h2>
+                    </div>
+                    <div class="strength">
+                        <div class="strengthMain">
+                            <div v-for="item in zp" :key="item.zid">
+                                <img :src="item.img" />
+                                <div class="font">
+                                    <h3>{{item.zuopin}}</h3>
+                                    <p>{{item.uname}}</p>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>		
+                
+                </div>
+            </cdiv>
+        </div>           
+    </div>
+    <footer id="footer"></footer>
+    
+    <script src="js/jquery-3.2.1.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+    <script>
+            $(document).ready(function(){ 
+            $(window).scroll(function(){
+                var scrollT=$(window).scrollTop();
+                console.log(scrollT)
+                var h=$(window).height();
+                if(scrollT>800){
+                    $(".strengthMain div").addClass("active");
+                }
+            })
+            })
+    </script>
+    
+    <script>
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                list:[],
+                zp:[],
+                lid:-1,
+            },
+            created(){
+                this.jieshao();
+                this.zuopin();
+            },
+            methods:{           
+                jieshao(){
+                    this.lid=location.search.slice(5);
+                    axios.get(
+                        "http://localhost:3000/jieshao?uid="+this.lid
+                    ).then(res=>{
+                        this.list=res.data.data[0];    
+                    })
+                },
+                zuopin(){
+                    axios.get(
+                        "http://localhost:3000/zuopin?lid="+this.lid
+                    ).then(res=>{
+                        this.zp=res.data.data;   
+                        console.log(this.zp);                      
+                    })
+                }
+            },
+        });
+    </script>
+   
+</body>
+</html>
